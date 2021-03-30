@@ -11,10 +11,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FuncionarioInputDTO {
+public class EmployeeInputDTO {
     
     private String nome;
     private String cpf;
     private String endereco;
+    private String enterpriseCnpj;
 
 }

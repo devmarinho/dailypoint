@@ -40,10 +40,6 @@ public class Token {
 	private Integer expiresIn;
 
 	@Getter @Setter
-	@Column(name = "expired")
-	private Boolean expired;
-
-	@Getter @Setter
 	@Column(name = "cognito_user_id", length = 15000)
 	private String cognitoUserId;
 

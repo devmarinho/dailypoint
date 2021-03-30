@@ -34,7 +34,6 @@ public class TokenService {
 		token.setAccessToken(accessToken);
 		token.setTokenType(tokenType);
 		token.setExpiresIn(expiresIn);
-		token.setExpired(false);
 		token.setCognitoUserId(cognitoUserId);
         token.setUsername(username);
 		return save(token);
