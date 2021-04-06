@@ -18,12 +18,13 @@ public class EnterpriseService {
         return enterpriseRepository.save(enterprise);
     }
 
-    public Enterprise create(String address, String cnpj, String name, String email){
-        Enterprise enterprise = new Enterprise();
+    public Enterprise create(String address, String cnpj, String name, String email, String username) throws BusinessErrorException{
+        Enterprise enterprise = findExistingEnterprise(cnpj);
         enterprise.setAddress(address);
         enterprise.setCnpj(cnpj);
         enterprise.setEmail(email);
         enterprise.setName(name);
+        enterprise.setUsername(username);
 
         return save(enterprise);
     }
@@ -35,7 +36,7 @@ public class EnterpriseService {
     public Enterprise findValidByCnpj(final String cnpj) throws BusinessErrorException{
         Enterprise enterprise = enterpriseRepository.findByCnpj(cnpj);
         if(enterprise == null)
-            throw new BusinessErrorException(1, BusinessErrorEnum.ENTERPRISE_NOT_FOUND, "Empresa não encontrada");
+            throw new BusinessErrorException(6, BusinessErrorEnum.ENTERPRISE_NOT_FOUND, "Empresa não encontrada");
     
         return enterprise;
     }
@@ -47,5 +48,20 @@ public class EnterpriseService {
         enterprise.setEmail(enterpriseInputDTO.getEmail());
         enterprise.setName(enterpriseInputDTO.getName());
         return save(enterprise);
+    }
+
+    public Enterprise fetchValidByUsername(final String username) throws BusinessErrorException{
+        Enterprise enterprise = enterpriseRepository.findByUsername(username);
+        if(enterprise == null)
+            throw new BusinessErrorException(6, BusinessErrorEnum.ENTERPRISE_NOT_FOUND, "Empresa não encontrada");
+    
+        return enterprise;
+    }
+
+    public Enterprise findExistingEnterprise(final String cnpj) throws BusinessErrorException{
+        Enterprise enterprise = findByCnpj(cnpj);
+        if(enterprise == null)
+            return new Enterprise();
+        throw new BusinessErrorException(13, BusinessErrorEnum.ENTERPRISE_NOT_FOUND, "Empresa já cadastrada");
     }
 }

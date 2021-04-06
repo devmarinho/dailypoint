@@ -29,6 +29,8 @@ public class Enterprise {
 
     private String email;
 
+    private String username;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "enterprise",  orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Employee> employees;
 

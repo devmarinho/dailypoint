@@ -21,11 +21,13 @@ import lombok.Setter;
 public class WorkedHour {
 
     @Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
 	private Long id;
 
     private int day;
+
+    private int month;
 
     private int year;
 

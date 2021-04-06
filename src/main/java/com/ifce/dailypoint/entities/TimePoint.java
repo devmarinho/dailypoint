@@ -26,13 +26,15 @@ import lombok.Setter;
 public class TimePoint {
 
     @Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
 	private Long id;
 
     private int day;
     
     private int year;
+
+    private int month;
 
     @Column(name="point_hour")
     private LocalDateTime pointHour;

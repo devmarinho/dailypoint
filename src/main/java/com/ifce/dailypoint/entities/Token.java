@@ -37,7 +37,7 @@ public class Token {
 	private String tokenType;
 
 	@Getter @Setter
-	private Integer expiresIn;
+	private LocalDateTime expiresIn;
 
 	@Getter @Setter
 	@Column(name = "cognito_user_id", length = 15000)

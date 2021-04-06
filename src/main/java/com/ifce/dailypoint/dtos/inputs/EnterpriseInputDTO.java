@@ -11,4 +11,5 @@ public class EnterpriseInputDTO {
     private String cnpj;
     private String address;
     private String email;
+    private String username;
 }

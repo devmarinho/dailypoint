@@ -1,6 +1,8 @@
 package com.ifce.dailypoint.dtos.outputs.authentication;
 
 
+import java.time.LocalDateTime;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,10 +15,10 @@ public class LoginOutputDTO {
 	private String IdToken;
 	private String refreshToken;
 	private String tokenType;
-	private Integer expiresIn;
+	private LocalDateTime expiresIn;
 	private String cognitoUserId;
 	
-	public LoginOutputDTO(String IdToken, String refreshToken, String tokenType, Integer expiresIn, String cognitoUserId) {
+	public LoginOutputDTO(String IdToken, String refreshToken, String tokenType, LocalDateTime expiresIn, String cognitoUserId) {
 		this.IdToken = IdToken;
 		this.refreshToken = refreshToken;	
 		this.tokenType = tokenType;

@@ -1,6 +1,10 @@
 package com.ifce.dailypoint.services;
 
+import java.time.LocalDateTime;
+
 import com.ifce.dailypoint.entities.Token;
+import com.ifce.dailypoint.exceptions.BusinessErrorEnum;
+import com.ifce.dailypoint.exceptions.BusinessErrorException;
 import com.ifce.dailypoint.repository.TokenRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +37,20 @@ public class TokenService {
 		token.setRefreshToken(refreshToken);
 		token.setAccessToken(accessToken);
 		token.setTokenType(tokenType);
-		token.setExpiresIn(expiresIn);
+		token.setExpiresIn(LocalDateTime.now().plusSeconds(expiresIn));
 		token.setCognitoUserId(cognitoUserId);
         token.setUsername(username);
 		return save(token);
+	}
+
+	public Token fetchValidTokenByIdToken(final String idToken) throws BusinessErrorException{
+		Token token = findByIdToken(idToken);
+		if(token == null)
+			throw new BusinessErrorException(4, BusinessErrorEnum.INVALID_TOKEN, "Token inválido");
+
+		if(token.getExpiresIn().isBefore(LocalDateTime.now()))
+			throw new BusinessErrorException(5, BusinessErrorEnum.EXPIRED_TOKEN, "Token expirado");
+
+		return token;
 	}
 }

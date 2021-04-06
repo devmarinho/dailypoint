@@ -33,7 +33,7 @@ public class CognitoConfig {
 
 		AWSCognitoIdentityProvider client = AWSCognitoIdentityProviderClientBuilder.standard()
                 .withCredentials(credProvider)
-                .withRegion(Regions.US_EAST_2)
+                .withRegion(Regions.US_WEST_1)
                 .build();
 		
 		return client;
